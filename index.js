@@ -1,28 +1,25 @@
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
+const mongoose = require('mongoose');
+const port = 5000;
+const userRoutes = require('./routes/userRoutes');
 
-app.listen(5000);
 
-
-
-
+mongoose.connect('mongodb+srv://rabin900:souls900@mycluster.emabxgd.mongodb.net/Shops').then((result) => {
+  app.listen(port);
+}).catch((err) => {
+  console.log(err);
+})
 app.use(morgan('dev'));
-
+app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.sendFile('./home_page.html', { root: __dirname });
+  return res.status(200).json({ status: 'This is shop Backened' });
 });
 
-app.get('/about', (req, res) => {
-  res.sendFile('./About.html', { root: __dirname });
-});
+app.use(userRoutes);
 
-
-
-app.use((req, res) => {
-  res.send('nothing found');
-});
 
 
 
