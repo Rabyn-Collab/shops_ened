@@ -13,7 +13,6 @@ mongoose.connect('mongodb+srv://rabin900:souls900@mycluster.emabxgd.mongodb.net/
 })
 app.use(morgan('dev'));
 app.use(express.json());
-
 app.get('/', (req, res) => {
   return res.status(200).json({ status: 'This is shop Backened' });
 });

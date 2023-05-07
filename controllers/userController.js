@@ -1,8 +1,81 @@
+const User = require('../model/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 
+module.exports.userLogin = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const userExist = await User.findOne({ email: email });
+    if (userExist) {
+      const checkPass = bcrypt.compareSync(password, userExist.password);
+      if (checkPass) {
+        const token = jwt.sign({ id: userExist._id, isAdmin: userExist.isAdmin }, 'tokenGenerate');
+        return res.status(200).json({
+          status: 'success',
+          user: {
+            token,
+            email,
+            isAdmin: userExist.isAdmin,
+            shippingAddress: userExist.shippingAddress
+          }
+        });
+
+      } else {
+        return res.status(401).json({
+          status: 'error',
+          message: 'invalid credential'
+        });
+      }
+
+    } else {
+      return res.status(401).json({
+        status: 'error',
+        message: 'user doesn\'t exist'
+      });
+
+    }
 
 
-module.exports.userLogin = (req, res) => {
-  console.log(req.body);
-  return res.status(201).json('hello user');
+  } catch (err) {
+    return res.status(400).json({
+      status: 'error',
+      message: `${err}`
+    });
+  }
+}
+
+
+module.exports.userSignUp = async (req, res) => {
+  const { fullname, email, password } = req.body;
+
+  try {
+    const userExist = await User.findOne({ email: email });
+    if (userExist) {
+      return res.status(422).json({
+        status: 'error',
+        message: 'user already exist'
+      });
+    } else {
+      const hashedPass = await bcrypt.hash(password, 10);
+      await User.create({
+        fullname,
+        email,
+        password: hashedPass
+      });
+      return res.status(422).json({
+        status: 'success',
+        message: 'user successfully registered'
+      });
+
+    }
+
+
+  } catch (err) {
+    return res.status(400).json({
+      status: 'error',
+      message: `${err}`
+    });
+  }
 }
