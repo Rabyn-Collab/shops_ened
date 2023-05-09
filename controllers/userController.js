@@ -64,7 +64,7 @@ module.exports.userSignUp = async (req, res) => {
         email,
         password: hashedPass
       });
-      return res.status(422).json({
+      return res.status(201).json({
         status: 'success',
         message: 'user successfully registered'
       });
