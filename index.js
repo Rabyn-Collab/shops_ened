@@ -4,6 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const port = 5000;
 const userRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoutes');
 const cors = require('cors');
 mongoose.set('strictQuery', false);
 
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(userRoutes);
+app.use(productRoutes);
 
 
 
