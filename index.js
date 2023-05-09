@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const port = 5000;
 const userRoutes = require('./routes/userRoutes');
 const cors = require('cors');
+mongoose.set('strictQuery', false);
 
 mongoose.connect('mongodb+srv://rabin900:souls900@mycluster.emabxgd.mongodb.net/Shops').then((result) => {
   app.listen(port);

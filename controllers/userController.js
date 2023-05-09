@@ -79,3 +79,20 @@ module.exports.userSignUp = async (req, res) => {
     });
   }
 }
+
+
+
+
+module.exports.getUserById = async (req, res) => {
+
+  try {
+
+
+
+  } catch (err) {
+
+  }
+
+
+
+}
