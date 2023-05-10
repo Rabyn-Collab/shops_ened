@@ -4,8 +4,16 @@ module.exports.productAdd = async (req, res) => {
 
   try {
 
+    return res.status(201).json({
+      status: 'success',
+      message: 'successfully created'
+    });
 
   } catch (err) {
+    return res.status(400).json({
+      status: 'error',
+      message: `${err}`
+    });
 
   }
 

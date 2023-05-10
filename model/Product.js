@@ -10,9 +10,14 @@ const reviewSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  username: {
+  rating: {
     type: Number,
     required: true
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
   }
 });
 
@@ -22,12 +27,9 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true
   },
-
-
   product_detail: {
     type: String,
     required: true,
-    unique: true
   },
 
   reviews: [reviewSchema],
