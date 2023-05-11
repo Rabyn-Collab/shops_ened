@@ -1,5 +1,5 @@
 const Product = require('../model/Product');
-
+const fs = require('fs');
 module.exports.productAdd = async (req, res) => {
   const imagePath = req.imagePath;
 
@@ -29,6 +29,9 @@ module.exports.productAdd = async (req, res) => {
     });
 
   } catch (err) {
+    fs.unlink(`.${imagePath}`, (err) => {
+      console.log(err);
+    })
     return res.status(400).json({
       status: 'error',
       message: `${err}`
@@ -90,4 +93,3 @@ module.exports.getProductById = async (req, res) => {
 
 
 }
-
