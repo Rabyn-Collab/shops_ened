@@ -1,8 +1,27 @@
 const Product = require('../model/Product');
 
 module.exports.productAdd = async (req, res) => {
+  const imagePath = req.imagePath;
 
+  const {
+    product_name,
+    product_detail,
+    product_price,
+    brand,
+    category,
+    countInStock
+  } = req.body;
   try {
+
+    await Product.create({
+      product_name,
+      product_detail,
+      product_price,
+      brand,
+      category,
+      countInStock,
+      product_image: imagePath
+    });
 
     return res.status(201).json({
       status: 'success',

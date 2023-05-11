@@ -17,8 +17,9 @@ module.exports.fileCheck = (req, res, next) => {
       const ext = path.extname(file.name);
       if (extensions.includes(ext)) {
         file.mv(`./uploads/images/${file.name}`, (err) => {
-          console.log(err);
+
         });
+        req.imagePath = `/uploads/images/${file.name}`;
         return next();
       } else {
         return res.status(400).json({
