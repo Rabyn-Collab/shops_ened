@@ -26,9 +26,6 @@ app.use(fileUpload({
   createParentPath: true
 }));
 
-app.get('/', (req, res) => {
-  return res.status(200).json({ status: 'This is shop Backened' });
-});
 
 app.use(userRoutes);
 app.use(productRoutes);
