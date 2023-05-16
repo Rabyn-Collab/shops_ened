@@ -71,7 +71,7 @@ module.exports.updateCheck = (req, res, next) => {
 
           })
 
-          req.imagePath = `/uploads/images/${file.name}`;
+          req.newImagePath = `/uploads/images/${file.name}`;
           return next();
         } else {
           return res.status(400).json({

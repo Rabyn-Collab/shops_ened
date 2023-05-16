@@ -99,7 +99,8 @@ module.exports.productUpdate = async (req, res) => {
   } = req.body;
   try {
 
-    if (req.imagePath) {
+    if (req.newImagePath) {
+      console.log('hello');
       await Product.findByIdAndUpdate({ _id: id }, {
         product_name,
         product_detail,
@@ -107,9 +108,8 @@ module.exports.productUpdate = async (req, res) => {
         brand,
         category,
         countInStock,
-        product_image: req.imagePath
+        product_image: req.newImagePath
       });
-
 
     } else {
       await Product.findByIdAndUpdate({ _id: id }, {
