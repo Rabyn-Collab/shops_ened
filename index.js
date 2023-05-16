@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const port = 5000;
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
+const orderRoutes = require('./routes/orderRoutes');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 
@@ -29,6 +30,7 @@ app.use(fileUpload({
 
 app.use(userRoutes);
 app.use(productRoutes);
+app.use(orderRoutes);
 
 
 
