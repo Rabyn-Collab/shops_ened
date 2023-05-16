@@ -49,8 +49,10 @@ module.exports.updateCheck = (req, res, next) => {
   try {
 
     if (!req.files || !req.files.product_image) {
+      console.log('hello2');
       return next();
     } else {
+      console.log('hello');
 
       if (!req.files.product_image || !req.query.imagePath) {
         return res.status(400).json({
