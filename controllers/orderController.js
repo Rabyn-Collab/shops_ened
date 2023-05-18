@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 module.exports.getAllOrder = async (req, res) => {
 
   try {
-    const data = await Order.find();
+    const data = await Order.find().sort({ createdAt: -1 });
     return res.status(200).json(data);
   } catch (err) {
     return res.status(400).json({
@@ -72,5 +72,26 @@ module.exports.order_create = async (req, res) => {
 
   }
 
+
+}
+
+
+
+
+
+module.exports.getOrderByUser = async (req, res) => {
+
+  try {
+
+    const data = await Order.find({ user: req.userId });
+    return res.status(200).json(data);
+
+  } catch (err) {
+
+    return res.status(400).json({
+      status: 'error',
+      message: `${err}`
+    });
+  }
 
 }

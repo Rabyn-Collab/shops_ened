@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const Joi = require('joi');
 const validator = require('express-joi-validation').createValidator({});
+const auth = require('../middleware/authRoute');
 
 const loginSchema = Joi.object().keys({
   email: Joi.string().email().required(),
@@ -21,7 +22,10 @@ const methodNotAllowed = (req, res) => res.status(405).json({ message: 'method n
 router.route('/api/userLogin').post(validator.body(loginSchema), userController.userLogin).all(methodNotAllowed);
 
 router.post('/api/userSignUp', validator.body(signUpSchema), userController.userSignUp);
-router.get('/api/userById', userController.getUserById);
+
+router.patch('/api/userUpdate', auth.checkUser, userController.userUpdate);
+
+router.get('/api/userById', auth.checkUser, userController.getUserById);
 
 
 module.exports = router;

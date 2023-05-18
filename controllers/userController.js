@@ -87,12 +87,67 @@ module.exports.getUserById = async (req, res) => {
 
   try {
 
+    const user = await User.findById({ _id: req.userId });
+    if (user) {
+      res.status(200).json({
+        status: 'success',
+        user: {
+          token: user.token,
+          email: user.email,
+          isAdmin: user.isAdmin,
+          shippingAddress: user.shippingAddress
+        }
+      });
+    } else {
+      return res.status(400).json({
+        status: 'error',
+        message: 'user not exist'
+      });
 
+    }
 
   } catch (err) {
-
+    return res.status(400).json({
+      status: 'error',
+      message: `${err}`
+    });
   }
 
 
 
 }
+
+
+
+module.exports.userUpdate = async (req, res) => {
+  try {
+
+    const user = await User.findById({ _id: req.userId });
+    if (user) {
+      user.fullname = req.body.fullname || user.fullname;
+      user.email = req.body.email || user.email;
+      user.shippingAddress = req.body.shippingAddress || user.shippingAddress;
+      await user.save();
+      return res.status(200).json({
+        status: 'success',
+        message: 'successfully update'
+      });
+    } else {
+
+      return res.status(400).json({
+        status: 'error',
+        message: 'user not exist'
+      });
+
+    }
+
+
+  } catch (err) {
+    return res.status(400).json({
+      status: 'error',
+      message: `${err}`
+    });
+  }
+}
+
+
