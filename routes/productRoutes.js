@@ -17,7 +17,7 @@ router.patch('/api/product_update/:id', auth.checkAdmin,
   checkFile.updateCheck,
   productController.productUpdate);
 
-router.patch('/api/product_review/:id', auth.checkAdmin,
+router.patch('/api/product_review/:id', auth.checkUser,
   productController.addReviewToProduct);
 
 
