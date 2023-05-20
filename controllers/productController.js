@@ -184,8 +184,8 @@ module.exports.productRemove = async (req, res) => {
 
 
 module.exports.addReviewToProduct = async (req, res) => {
-  
-  const { rating, comment, fullname } = req.body;
+
+  const { rating, comment, username } = req.body;
   const id = req.params.id;
 
   try {
@@ -199,7 +199,7 @@ module.exports.addReviewToProduct = async (req, res) => {
         });
       } else {
         const review = {
-          name: fullname,
+          username,
           rating: Number(rating),
           comment,
           user: req.userId,
