@@ -17,6 +17,11 @@ router.patch('/api/product_update/:id', auth.checkAdmin,
   checkFile.updateCheck,
   productController.productUpdate);
 
+router.patch('/api/product_review/:id', auth.checkAdmin,
+  checkFile.updateCheck,
+  productController.addReviewToProduct);
+
+
 router.delete('/api/product_remove/:id', auth.checkAdmin, productController.productRemove);
 
 
