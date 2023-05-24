@@ -17,6 +17,7 @@ module.exports.userLogin = async (req, res) => {
           user: {
             token,
             email,
+            fullname: userExist.fullname,
             isAdmin: userExist.isAdmin,
             shippingAddress: userExist.shippingAddress
           }
