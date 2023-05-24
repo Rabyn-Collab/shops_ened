@@ -94,6 +94,7 @@ module.exports.getUserById = async (req, res) => {
         user: {
           token: user.token,
           email: user.email,
+          fullname: user.fullname,
           isAdmin: user.isAdmin,
           shippingAddress: user.shippingAddress
         }
