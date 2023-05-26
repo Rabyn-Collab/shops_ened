@@ -26,6 +26,7 @@ router.post('/api/userSignUp', validator.body(signUpSchema), userController.user
 router.patch('/api/userUpdate', auth.checkUser, userController.userUpdate);
 
 router.get('/api/userById', auth.checkUser, userController.getUserById);
+router.get('/api/getAllUser', auth.checkAdmin, userController.getAllUser);
 
 
 module.exports = router;

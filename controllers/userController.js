@@ -153,3 +153,25 @@ module.exports.userUpdate = async (req, res) => {
 }
 
 
+
+
+
+
+
+module.exports.getAllUser = async (req, res) => {
+
+  try {
+
+    const users = await User.find();
+
+    return res.status(200).json(users);
+  } catch (err) {
+    return res.status(400).json({
+      status: 'error',
+      message: `${err}`
+    });
+  }
+
+
+
+}
